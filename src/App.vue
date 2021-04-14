@@ -4,9 +4,27 @@
   <button @click="handleClick">click me</button>
   <p>Welcome...</p>
   <div v-if="showModal">
-    <Modal :header="header" :text="text" :weird_array="weird_array" theme="sale" @close="toggleModal" />
+    <Modal theme="sale" @close="toggleModal" >
+      <template v-slot:links> 
+        <a href="#">sign up now</a>  
+        <a href="#">more info</a>
+      </template>
+      <h1>{{ header }}</h1>
+      <p>{{ text }}</p>
+      <p>{{ weird_array }}</p>  
+    </Modal>
   </div>
+
+  <div v-if="showModal2">
+    <Modal theme="saled" @close="toggleModal2" >
+      <h1>Modal 2</h1>
+      <p>testing testing</p>
+      <p>hmmmmmmm</p>  
+    </Modal>
+  </div>
+
   <button @click="toggleModal">open modal</button>
+  <button @click="toggleModal2">open modal 2</button>
   
 </template>
 
@@ -24,7 +42,8 @@ import Modal from "./components/Modal.vue"
       header: "Sign up for the Giveaway!",
       text: "Grab your ninja swag for half price!",
       weird_array: [2, 7, 4, 3],
-      showModal: false
+      showModal: false,
+      showModal2: false
     }
   },
   methods: {
@@ -35,7 +54,10 @@ import Modal from "./components/Modal.vue"
     },
     toggleModal() {
       this.showModal = !this.showModal
-    }
+    },
+    toggleModal2() {
+      this.showModal2 = !this.showModal2
+    },
   },
 })
 export default class App extends Vue {}
